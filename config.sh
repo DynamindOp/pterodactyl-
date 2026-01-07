@@ -60,60 +60,46 @@ run_command() {
 # ============================
 
 blueprint_extension() {
-  bash <(curl -s https://github.com/rasingamerzop/1.git || return 1
-  ls || return 1
+  rm -rf /tmp/blueprint_ext
+  mkdir -p /tmp/blueprint_ext
+  cd /tmp/blueprint_ext || return 1
+
+  git clone https://github.com/rasingamerzop/1.git || return 1
   cd 1 || return 1
-  # Run Nebula
-  # echo "Running nebula..."
+
   mv nebula.blueprint /var/www/pterodactyl
-  blueprint -install nebula.blueprint 
+  blueprint -install nebula.blueprint || return 1
 
-  # Run huxregister
-  # echo "Running huxregister..."
   mv huxregister.blueprint /var/www/pterodactyl
-  blueprint -install huxregister.blueprint 
+  blueprint -install huxregister.blueprint || return 1
 
-  # Run loader
-  # echo "Running loader..."
   mv loader.blueprint /var/www/pterodactyl
-  blueprint -install loader.blueprint 
- 
-  # Run simplefavicons
-  # echo "Running simplefavicons..."
+  blueprint -install loader.blueprint || return 1
+
   mv simplefavicons.blueprint /var/www/pterodactyl
-  blueprint -install simplefavicons.blueprint 
+  blueprint -install simplefavicons.blueprint || return 1
 
-  # Run simplefooters
-  # echo "Running simplefooters..."
   mv simplefooters.blueprint /var/www/pterodactyl
-  blueprint -install simplefooters.blueprint 
+  blueprint -install simplefooters.blueprint || return 1
 
-  # Run snowflakes
-  # echo "Running snowflakes..."
   mv snowflakes.blueprint /var/www/pterodactyl
-  blueprint -install snowflakes.blueprint 
+  blueprint -install snowflakes.blueprint || return 1
 
-  # Run mcplugin
-  # echo "Running mcplugin..."
   mv mcplugin.blueprint /var/www/pterodactyl
-  blueprint -install mcplugin.blueprint
+  blueprint -install mcplugin.blueprint || return 1
 
-  # Run playermanager
-  # echo "Running playermanager..."
   mv minecraftplayermanager.blueprint /var/www/pterodactyl
-  blueprint -install minecraftplayermanager.blueprint
+  blueprint -install minecraftplayermanager.blueprint || return 1
 
-  # Run versionchanger
-  # echo "Running versionchanger..."
   mv versionchanger.blueprint /var/www/pterodactyl
-  blueprint -install versionchanger.blueprint
+  blueprint -install versionchanger.blueprint || return 1
 
-  # Run Nightadmin
-  # echo "Running nightadmin..."
   mv nightadmin.blueprint /var/www/pterodactyl
   blueprint -install nightadmin.blueprint || return 1
-return 0
+
+  return 0
 }
+
 
 python_runner() {
   python3 <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/24-7/refs/heads/main/24) || return 1
